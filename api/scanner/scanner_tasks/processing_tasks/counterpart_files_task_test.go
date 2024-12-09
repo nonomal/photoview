@@ -1,4 +1,4 @@
-package processing_tasks_test
+package processing_tasks
 
 import (
 	"context"
@@ -8,7 +8,6 @@ import (
 	"testing"
 
 	"github.com/photoview/photoview/api/scanner/scanner_task"
-	"github.com/photoview/photoview/api/scanner/scanner_tasks/processing_tasks"
 	"github.com/photoview/photoview/api/test_utils"
 	"github.com/photoview/photoview/api/utils"
 )
@@ -70,7 +69,7 @@ func TestCounterpartFilesTaskMediaFound(t *testing.T) {
 		},
 	}
 
-	mediaPath := test_utils.PathFromAPIRoot("scanner/test_data/fake_media")
+	mediaPath := test_utils.PathFromAPIRoot("scanner/test_media/fake_media")
 
 	for _, tc := range tests {
 		t.Run(tc.name, func(t *testing.T) {
@@ -85,7 +84,7 @@ func TestCounterpartFilesTaskMediaFound(t *testing.T) {
 				t.Fatalf("Stat(%q) error: %v", fname, err)
 			}
 
-			var task processing_tasks.CounterpartFilesTask
+			var task CounterpartFilesTask
 			got, err := task.MediaFound(ctx, fi, fname)
 			if err != nil {
 				t.Fatalf("task.MediaFound(ctx, %q) error: %v", fname, err)
